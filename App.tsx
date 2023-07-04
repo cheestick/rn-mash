@@ -1,73 +1,26 @@
 import { useState } from 'react';
-import { FlatList, RefreshControl, ScrollView, SectionList, StyleSheet, Text, View } from 'react-native';
+import { FlatList, RefreshControl, ScrollView, SectionList, StyleSheet, Text, TextInput, View } from 'react-native';
 import { dataList, titleList } from './mock';
 
 
 export default function App() {
-  const [items, setItems] = useState(dataList)
-  const [refreshing, setRefreshing] = useState(false)
-
-  const onRefresh = () => {
-    setRefreshing(true)
-    const newItemCounter = (items.length + 1).toString()
-    setTimeout(() => {
-      setItems([...items, {id: newItemCounter, text: `item ${newItemCounter}`}])
-      setRefreshing(false)
-    }, 1000)
-  }
+  const [name, setName] = useState('')
 
   return (
     <View style={sx.container}>
-
-      <SectionList 
-        keyExtractor={(item, index) => index.toString()}
-        sections={titleList}
-        renderSectionHeader={({section}) => (
-        <View style={[sx.item, {backgroundColor: '#000000aa'}]} >
-            <Text  style={[sx.text, {fontSize: 40, color: 'white'} ]}>{section.title}</Text>
-        </View>
-        )}
-        renderItem={ ({item}) => 
-        <View style={sx.item} >
-            <Text  style={sx.text}>{item}</Text>
-        </View>
-        }
+      <Text style={sx.text}>Your name:</Text>
+      <TextInput style={sx.input} cursorColor={'white'}
+        placeholder='e.g. John Doe'
+        placeholderTextColor={'#ffffff67'}
+        onChangeText={value => setName(value)}
+        keyboardAppearance='dark'
+        maxLength={20}
+        // multiline
+        // keyboardType='phone-pad'
+        // editable={false}
+        // secureTextEntry
       />
-
-      {/* <FlatList
-        data={items}
-        // numColumns={2}
-        horizontal={false}
-        // inverted
-        keyExtractor={(item, index) => item.id.toString()}
-        renderItem={({item}) => (
-          <View style={sx.item} >
-              <Text  style={sx.text}>{item.text}</Text>
-          </View>
-        )}
-        refreshControl={<RefreshControl 
-          refreshing={refreshing} 
-          onRefresh={onRefresh}
-          tintColor={'#ff00ff45'}
-          />}
-      /> */}
-
-      {/* <ScrollView 
-        horizontal={false} 
-        refreshControl={<RefreshControl 
-        refreshing={refreshing} 
-        onRefresh={onRefresh}
-        colors={['#ff00ff']}
-        />}>
-
-        {items.map(it =>  (
-          <View style={sx.item} key={it.id}>
-              <Text  style={sx.text}>{it.text}</Text>
-          </View>
-        )
-        )}
-      
-        </ScrollView> */}
+      <Text style={sx.text}>Your name is : {name}</Text>
     </View>
   );
 }
@@ -75,9 +28,10 @@ export default function App() {
 const sx = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 30,
+    paddingTop: 40,
     backgroundColor: '#fff',
     alignItems: 'stretch',
+    paddingHorizontal: 20,
     // justifyContent: 'center',
   },
   item: {
@@ -92,5 +46,18 @@ const sx = StyleSheet.create({
   },
   text: {
     fontSize: 24,
+  },
+  input: {
+    backgroundColor: '#00004555',
+    // paddingVertical: 15,
+    paddingTop: 15,
+    paddingBottom: 15,
+    paddingHorizontal: 25,
+    marginVertical: 10,
+    color: 'white',
+    fontSize: 24,
+    borderBottomWidth: 2,
+    borderBottomColor: '#00006755',
+    borderRadius: 20,
   }
 });
