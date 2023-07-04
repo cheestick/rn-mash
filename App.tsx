@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FlatList, RefreshControl, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { FlatList, RefreshControl, ScrollView, SectionList, StyleSheet, Text, View } from 'react-native';
 import { dataList, titleList } from './mock';
 
 
@@ -19,7 +19,22 @@ export default function App() {
   return (
     <View style={sx.container}>
 
-      <FlatList
+      <SectionList 
+        keyExtractor={(item, index) => index.toString()}
+        sections={titleList}
+        renderSectionHeader={({section}) => (
+        <View style={[sx.item, {backgroundColor: '#000000aa'}]} >
+            <Text  style={[sx.text, {fontSize: 40, color: 'white'} ]}>{section.title}</Text>
+        </View>
+        )}
+        renderItem={ ({item}) => 
+        <View style={sx.item} >
+            <Text  style={sx.text}>{item}</Text>
+        </View>
+        }
+      />
+
+      {/* <FlatList
         data={items}
         // numColumns={2}
         horizontal={false}
@@ -35,7 +50,7 @@ export default function App() {
           onRefresh={onRefresh}
           tintColor={'#ff00ff45'}
           />}
-      />
+      /> */}
 
       {/* <ScrollView 
         horizontal={false} 
