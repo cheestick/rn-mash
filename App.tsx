@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Button, FlatList, RefreshControl, ScrollView, SectionList, 
-  StyleSheet, Text, TextInput, TouchableOpacity, TouchableHighlight, View } from 'react-native';
+  StyleSheet, Text, TextInput, TouchableWithoutFeedback,
+   TouchableOpacity, TouchableHighlight, View } from 'react-native';
 import { dataList, titleList } from './mock';
 
 
@@ -27,14 +28,24 @@ export default function App() {
         // secureTextEntry
       />
 
-      <TouchableHighlight
+      <TouchableWithoutFeedback
+        style={sx.buttonTO}
+        onPress={onPressHandler} 
+        >
+          <View style={sx.button}>
+
+              <Text>{submitted ? 'Clear' : 'Submit'}</Text>
+          </View>
+      </TouchableWithoutFeedback>
+
+      {/* <TouchableHighlight
         style={sx.buttonTO}
         onPress={onPressHandler} 
         activeOpacity={0.6}
         underlayColor={'#0d046f99'}
         >
         <Text>{submitted ? 'Clear' : 'Submit'}</Text>
-      </TouchableHighlight>
+      </TouchableHighlight> */}
 
       {/* <TouchableOpacity
         style={sx.buttonTO}
