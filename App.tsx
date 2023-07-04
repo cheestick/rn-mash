@@ -1,6 +1,5 @@
-import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 
 const data = [
   {key:1, item: 'item 1'}, 
@@ -12,6 +11,9 @@ const data = [
   {key:7, item: 'item 7'}, 
   {key:8, item: 'item 8'}, 
   {key:9, item: 'item 9'}, 
+  {key:10, item: 'item 10'}, 
+  {key:11, item: 'item 11'}, 
+  {key:12, item: 'item 12'}, 
 ]
 
 export default function App() {
@@ -19,14 +21,16 @@ export default function App() {
 
   return (
     <View style={sx.container}>
+      <ScrollView>
+
         {items.map(it =>  (
           <View style={sx.item} >
               <Text key={it.key} style={sx.text}>{it.item}</Text>
           </View>
         )
-          )}
+        )}
       
-      {/* <StatusBar style="auto" /> */}
+        </ScrollView>
     </View>
   );
 }
