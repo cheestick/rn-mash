@@ -1,20 +1,53 @@
 import { StatusBar } from 'expo-status-bar';
+import { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
+const data = [
+  {key:1, item: 'item 1'}, 
+  {key:2, item: 'item 2'}, 
+  {key:3, item: 'item 3'}, 
+  {key:4, item: 'item 4'}, 
+  {key:5, item: 'item 5'}, 
+  {key:6, item: 'item 6'}, 
+  {key:7, item: 'item 7'}, 
+  {key:8, item: 'item 8'}, 
+  {key:9, item: 'item 9'}, 
+]
+
 export default function App() {
+  const [items, setItem] = useState(data)
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
+    <View style={sx.container}>
+        {items.map(it =>  (
+          <View style={sx.item} >
+              <Text key={it.key} style={sx.text}>{it.item}</Text>
+          </View>
+        )
+          )}
+      
+      {/* <StatusBar style="auto" /> */}
     </View>
   );
 }
 
-const styles = StyleSheet.create({
+const sx = StyleSheet.create({
   container: {
     flex: 1,
+    paddingTop: 30,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: 'stretch',
+    // justifyContent: 'center',
   },
+  item: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginVertical: 10,
+    marginHorizontal: 20,
+    paddingVertical: 20,
+    backgroundColor: '#12af3d54',
+  },
+  text: {
+    fontSize: 24,
+  }
 });
