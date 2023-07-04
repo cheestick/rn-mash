@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Button, FlatList, RefreshControl, ScrollView, SectionList, 
   StyleSheet, Text, TextInput, TouchableWithoutFeedback,
-   TouchableOpacity, TouchableHighlight, View } from 'react-native';
+   TouchableOpacity, TouchableHighlight, View, Pressable } from 'react-native';
 import { dataList, titleList } from './mock';
 
 
@@ -28,15 +28,26 @@ export default function App() {
         // secureTextEntry
       />
 
-      <TouchableWithoutFeedback
+      <Pressable 
+        onPress={onPressHandler}
+        // onLongPress={onPressHandler}
+        // delayLongPress={2000}
+        hitSlop={{top: 10, bottom: 10, right: 10, left: 10}}
+        // android_ripple={{color: '#0ff'}}
+        // disabled={submitted}
+        style={( {pressed} ) => [sx.button, {backgroundColor: pressed ? 'tomato': 'teal'}]}
+      >
+        <Text>{submitted ? 'Clear' : 'Submit'}</Text>
+      </Pressable>
+
+      {/* <TouchableWithoutFeedback
         style={sx.buttonTO}
         onPress={onPressHandler} 
         >
           <View style={sx.button}>
-
               <Text>{submitted ? 'Clear' : 'Submit'}</Text>
           </View>
-      </TouchableWithoutFeedback>
+      </TouchableWithoutFeedback> */}
 
       {/* <TouchableHighlight
         style={sx.buttonTO}
