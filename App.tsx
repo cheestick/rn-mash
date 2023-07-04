@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Button, FlatList, RefreshControl, ScrollView, SectionList, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Button, FlatList, RefreshControl, ScrollView, SectionList, 
+  StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { dataList, titleList } from './mock';
 
 
@@ -25,11 +26,19 @@ export default function App() {
         // editable={false}
         // secureTextEntry
       />
-      <View style={sx.button}>
+
+      <TouchableOpacity
+        style={sx.buttonTO}
+        onPress={onPressHandler} 
+        activeOpacity={0.3}>
+        <Text>{submitted ? 'Clear' : 'Submit'}</Text>
+      </TouchableOpacity>
+
+      {/* <View style={sx.button}>
         <Button title='Submit' color={'white'}
           onPress={onPressHandler}
         />
-      </View>
+      </View> */}
       <Text style={sx.text}>Your name is : {name}</Text>
       {submitted && name
         ? <Text key='is-submitted' style={[sx.text, {color: 'green'}]}>{name} approved!</Text>  
@@ -80,5 +89,14 @@ const sx = StyleSheet.create({
     paddingHorizontal: 25,
     borderRadius: 25,
     alignItems: 'stretch'
+  },
+  buttonTO: {
+    padding: 20,
+    marginVertical: 10,
+    borderColor: '#ffaadd54',
+    backgroundColor: '#ffaadd23',
+    borderRadius: 50,
+    borderWidth: 2,
+    alignItems: 'center',
   }
 });
