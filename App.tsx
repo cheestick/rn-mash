@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Button, FlatList, RefreshControl, ScrollView, SectionList, 
   StyleSheet, Text, TextInput, TouchableWithoutFeedback,
-   TouchableOpacity, TouchableHighlight, View, Pressable } from 'react-native';
+   TouchableOpacity, TouchableHighlight, View, Pressable, Alert } from 'react-native';
 import { dataList, titleList } from './mock';
 
 
@@ -10,7 +10,15 @@ export default function App() {
   const [submitted, setSubmitted] = useState(false)
 
   const onPressHandler = () => {
-    setSubmitted(!submitted)
+    if (name.length > 3) {
+      setSubmitted(!submitted)
+    } else {
+      Alert.alert('Warning', 'The name must be longer than 3 caracters', [{
+        text: 'Okay',
+        style: 'cancel',
+        onPress: () => console.warn('Ok Pressed!')
+      }], {cancelable: true, onDismiss: () => console.warn('Alert dismissed!')})
+    }
   }
 
   return (
